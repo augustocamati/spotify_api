@@ -13,7 +13,7 @@ O objetivo é demonstrar uma arquitetura limpa e moderna para consumir APIs REST
 - ☁️ **Spring Cloud OpenFeign**
 - 🎵 **Spotify Web API**
 - 🧰 **Maven**
-
+- 📘 **Swagger / Springdoc OpenAPI 3**
 ---
 
 ## 🧩 Estrutura do Projeto
