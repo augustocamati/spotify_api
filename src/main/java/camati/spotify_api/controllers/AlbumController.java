@@ -10,6 +10,8 @@ import camati.spotify_api.clients.openFeing.AuthSpotifyClient;
 import camati.spotify_api.clients.openFeing.dto.AlbumResponse;
 import camati.spotify_api.clients.openFeing.dto.LoginRequest;
 import camati.spotify_api.config.SpotifyProperties;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -21,6 +23,9 @@ public class AlbumController {
   private final SpotifyProperties spotifyProperties;
 
   @GetMapping("/albums")
+  
+  @Operation(summary = "Buscar lista de álbuns", description = "Obtém os álbuns disponíveis usando o token da API do Spotify.")
+  @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso")
   public ResponseEntity<AlbumResponse> GetAlbums() {
     LoginRequest request = new LoginRequest(
         "client_credentials",
