@@ -9,8 +9,8 @@ import camati.spotify_api.clients.openFeing.AlbumSpotifyClient;
 import camati.spotify_api.clients.openFeing.AuthSpotifyClient;
 import camati.spotify_api.clients.openFeing.dto.AlbumResponse;
 import camati.spotify_api.clients.openFeing.dto.LoginRequest;
+import camati.spotify_api.config.SpotifyProperties;
 import lombok.AllArgsConstructor;
-
 
 @RestController
 @RequestMapping("spotify/api")
@@ -18,23 +18,20 @@ import lombok.AllArgsConstructor;
 public class AlbumController {
   private final AuthSpotifyClient authSpotifyClient;
   private final AlbumSpotifyClient albumSpotifyClient;
+  private final SpotifyProperties spotifyProperties;
 
- 
-
-  @GetMapping("/albums") 
+  @GetMapping("/albums")
   public ResponseEntity<AlbumResponse> GetAlbums() {
     LoginRequest request = new LoginRequest(
-      "client_credentials",
-      "e8285f6f9475413995082aa3e7d5034c",
-      "539e627eaf1a4dabbe0f654455c5ac01"
-    );
+        "client_credentials",
+        spotifyProperties.getClientId(),
+        spotifyProperties.getClientSecret());
 
     var token = authSpotifyClient.login(request).getAccessToken();
     var authorization = "Bearer " + token;
 
     var albums = albumSpotifyClient.getAllAlbums(authorization);
-      return ResponseEntity.ok(albums);
+    return ResponseEntity.ok(albums);
   }
-  
-  
+
 }
